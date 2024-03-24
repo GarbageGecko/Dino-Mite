@@ -175,7 +175,6 @@ MonoBehaviour:
   - {fileID: 819274362}
   - {fileID: 537751469}
   - {fileID: 706907742}
-  hasspawned: 0
 --- !u!1 &383701245
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   moveDistance: 2
-  hasmoved: 0
 --- !u!1 &1357665702
 GameObject:
   m_ObjectHideFlags: 0

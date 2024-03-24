@@ -4,32 +4,18 @@ using UnityEngine;
 
 public class Meteorl1 : MonoBehaviour
 {
-    public static Meteorl1 Instance;
-    public float moveSpeed = 20f; // Bewegungsgeschwindigkeit nach unten
-    private bool hasMoved = false;
 
-    void Update()
+    public float moveSpeed = 20f; // Bewegungsgeschwindigkeit nach unten
+
+ void Start()
     {
         
-           if (!hasMoved && Time.time >= 2f)
-        {
-            MoveDown();
-            hasMoved = true;
-        }
-        // Überprüfen, ob das Objekt sich noch nicht bewegt hat und zwei Sekunden vergangen sind
-       
     }
-
-
-    void MoveDown()
+    void Update()
     {
-        // Bewegung um 20 Einheiten nach unten
-        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
+  
     }
-
-    public void setFalse(){
-        hasMoved=false;
-        Debug.Log("setfalse() wurde aufgerufen!");
-    
+    public void moveMeteors(){
+        transform.Translate(Vector3.down * moveSpeed * Time.deltaTime);
     }
 }
