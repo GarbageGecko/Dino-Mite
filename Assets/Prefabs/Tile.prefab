@@ -93,8 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2912995254113099143}
-  - component: {fileID: 7659797529748339988}
   - component: {fileID: 4365022665442942462}
+  - component: {fileID: 7659797529748339988}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -118,6 +118,22 @@ Transform:
   - {fileID: 8768683240311717930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4365022665442942462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3982460500779326034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f73e36ff5d2007459b04f3a8f63ebcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseColor: {r: 0.9411765, g: 1, b: 0.9411765, a: 0.78431374}
+  _offsetColor: {r: 0.88235295, g: 1, b: 0.88235295, a: 0.78431374}
+  _renderer: {fileID: 7659797529748339988}
+  _highlight: {fileID: 1041506200520852870}
 --- !u!212 &7659797529748339988
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -170,19 +186,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4365022665442942462
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3982460500779326034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f73e36ff5d2007459b04f3a8f63ebcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _baseColor: {r: 0.8326362, g: 0.9339623, b: 0.8326362, a: 0.68235296}
-  _offsetColor: {r: 0.56077653, g: 0.754717, b: 0.46635816, a: 0.77254903}
-  _renderer: {fileID: 7659797529748339988}
-  _highlight: {fileID: 1041506200520852870}

@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 7229737801579027928}
   - component: {fileID: 2674507405231293266}
   - component: {fileID: 5796058150074909157}
-  - component: {fileID: 8610138532066405070}
+  - component: {fileID: -8216012827836080186}
+  - component: {fileID: -1482826445393337024}
   m_Layer: 0
-  m_Name: Dino
-  m_TagString: Untagged
+  m_Name: BabyDino
+  m_TagString: BabyDino
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 4766409717962944183}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5365, y: -2.4211, z: 0}
-  m_LocalScale: {x: 0.46938258, y: 0.42135078, z: 1}
+  m_LocalPosition: {x: -35.6557, y: -2.642, z: 0}
+  m_LocalScale: {x: 0.23093624, y: 0.2004787, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.21115166, g: 0.6886792, b: 0.32580006, a: 1}
+  m_Color: {r: 0.5019608, g: 0.8784314, b: 0.5019608, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,7 +132,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2}
   m_EdgeRadius: 0
---- !u!114 &8610138532066405070
+--- !u!50 &-8216012827836080186
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766409717962944183}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-1482826445393337024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +168,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4766409717962944183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ad8bbcaa865a6d4289b915cfd860d21, type: 3}
+  m_Script: {fileID: 11500000, guid: a06e382c9dd27a641a462a44fd570af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

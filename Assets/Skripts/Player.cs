@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
     {
         HandlePlayerInput();
     }
-   private void HandlePlayerInput()
+
+    private void HandlePlayerInput()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -34,10 +35,10 @@ public class Player : MonoBehaviour
             Vector2 targetPosition = new Vector2(Mathf.Round(mouseWorldPosition.x), Mathf.Round(mouseWorldPosition.y));
 
             Tile targetTile = _gridManager.GetTileAtPosition(targetPosition);
-            if (targetTile != null && targetTile.transform.position.y == 0) // Überprüfung, ob sich der Spieler in der untersten Zeile befindet
+            if (targetTile != null && targetTile.transform.position.y == 0)
             {
                 float horizontalDifference = targetTile.transform.position.x - _currentTilePosition.x;
-                if (Mathf.Abs(horizontalDifference) == 1) // Überprüfung, ob sich der Spieler nur um ein Feld bewegt
+                if (Mathf.Abs(horizontalDifference) == 1)
                 {
                     MoveToTile(targetTile);
                 }
@@ -58,10 +59,26 @@ public class Player : MonoBehaviour
         {
             GameOver();
         }
+        if (other.CompareTag("BabyDino"))
+        {
+            TouchBabyDino();
+        }
     }
 
     private void GameOver()
     {
         Debug.Log("Game Over!");
     }
+
+    private void TouchBabyDino()
+    {
+        Debug.Log("You've reached the Baby Dino!");
+        BabyDino babyDino = FindObjectOfType<BabyDino>();
+        if (babyDino != null)
+        {
+            babyDino.StartFollowingPlayer();
+            FindObjectOfType<GridManager>().HasReachedBaby = true;
+        }
+    }
 }
+

@@ -7,7 +7,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Meteor _meteorPrefab;
-    [SerializeField] private Player _playerPrefab; 
+    [SerializeField] private Player _playerPrefab;
+    [SerializeField] private BabyDino _babyDinoPrefab;
     [SerializeField] private Transform _cam;
 
     private Dictionary<Vector2, Tile> _tiles;
@@ -15,6 +16,15 @@ public class GridManager : MonoBehaviour
     private Player _player;
     private float _nextSpawnTime = 0f;
     private float _spawnInterval = 1f;
+    private bool _hasReachedBaby = false; // Neu hinzugefügt
+
+    public int Width => _width;
+    public int Height => _height;
+    public bool HasReachedBaby
+    {
+        get { return _hasReachedBaby; }
+        set { _hasReachedBaby = value; }
+    }
 
     void Start()
     {
@@ -43,6 +53,7 @@ public class GridManager : MonoBehaviour
     void StartRound()
     {
         SpawnPlayer();
+        SpawnBabyDino();
         StartCoroutine(MoveMeteorsDownCoroutine());
     }
 
@@ -55,12 +66,27 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    void SpawnBabyDino()
+    {
+        var tile = GetTileAtPosition(new Vector2(_width - 1, 0));
+        if (tile != null)
+        {
+            Instantiate(_babyDinoPrefab, tile.transform.position, Quaternion.identity);
+        }
+    }
+
     void Update()
     {
         HandlePlayerInput();
+
+        if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
+        {
+            Debug.Log("You won!");
+            _hasReachedBaby = false; // Setze den Status zurück
+        }
     }
 
-   void HandlePlayerInput()
+    void HandlePlayerInput()
     {
         if (_player != null)
         {
@@ -69,7 +95,7 @@ public class GridManager : MonoBehaviour
             {
                 Vector2 targetPosition = _player.CurrentTilePosition + new Vector2(horizontalInput, 0);
                 var targetTile = GetTileAtPosition(targetPosition);
-                if (targetTile != null && targetTile.transform.position.y == 0 && Mathf.Abs(horizontalInput) == 1) // Überprüfung, ob sich der Spieler in der untersten Zeile befindet und nur um ein Feld bewegt
+                if (targetTile != null && targetTile.transform.position.y == 0 && Mathf.Abs(horizontalInput) == 1)
                 {
                     _player.MoveToTile(targetTile);
                 }
@@ -97,7 +123,7 @@ public class GridManager : MonoBehaviour
 
             _player.HasMoved = false;
 
-            yield return new WaitForSeconds(1f); 
+            yield return new WaitForSeconds(1f);
         }
     }
 
