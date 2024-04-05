@@ -4,9 +4,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     private Vector2 _currentTilePosition;
-    private float _moveSpeed = 1f;
     private Camera _mainCamera;
-    private GridManager _gridManager;
+    private GameManager _gridManager;
     private bool _hasMoved = false;
 
     public Vector2 CurrentTilePosition => _currentTilePosition;
@@ -19,7 +18,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _mainCamera = Camera.main;
-        _gridManager = FindObjectOfType<GridManager>();
+        _gridManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
@@ -77,7 +76,7 @@ public class Player : MonoBehaviour
         if (babyDino != null)
         {
             babyDino.StartFollowingPlayer();
-            FindObjectOfType<GridManager>().HasReachedBaby = true;
+            FindObjectOfType<GameManager>().HasReachedBaby = true;
         }
     }
 }

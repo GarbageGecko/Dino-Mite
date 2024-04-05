@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class BabyDino : MonoBehaviour
 {
-    private Player _player; // Referenz zum Spieler
-    private bool _isFollowing = false; // Flag, um zu überprüfen, ob das Baby Dino dem Spieler folgt
+    private Player _player;
+    private bool _isFollowing = false;
 
     void Start()
     {
-        GridManager gridManager = FindObjectOfType<GridManager>();
+        GameManager gridManager = FindObjectOfType<GameManager>();
         Vector2 dinoPosition = new Vector2(gridManager.Width - 1, 0);
         Tile tile = gridManager.GetTileAtPosition(dinoPosition);
         if (tile != null)

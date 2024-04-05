@@ -1,22 +1,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
-public class GridManager : MonoBehaviour
+
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Meteor _meteorPrefab;
+    [SerializeField] private Meteor _fastMeteorPrefab;
     [SerializeField] private Player _playerPrefab;
     [SerializeField] private BabyDino _babyDinoPrefab;
     [SerializeField] private Transform _cam;
+
+
 
     private Dictionary<Vector2, Tile> _tiles;
     private List<Meteor> _meteors = new List<Meteor>();
     private Player _player;
     private float _nextSpawnTime = 0f;
     private float _spawnInterval = 1f;
-    private bool _hasReachedBaby = false; // Neu hinzugefügt
+    private bool _hasReachedBaby = false;
 
     public int Width => _width;
     public int Height => _height;
@@ -50,12 +55,15 @@ public class GridManager : MonoBehaviour
         _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10);
     }
 
+
+
     void StartRound()
     {
         SpawnPlayer();
         SpawnBabyDino();
         StartCoroutine(MoveMeteorsDownCoroutine());
     }
+
 
     void SpawnPlayer()
     {
@@ -133,11 +141,32 @@ public class GridManager : MonoBehaviour
         var tile = GetTileAtPosition(new Vector2(randomX, _height - 1));
         if (tile != null)
         {
-            var newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-            _meteors.Add(newMeteor);
-            _nextSpawnTime = Time.time + _spawnInterval;
+            Meteor newMeteor;
+
+            if (SceneManager.GetActiveScene().name == "Level1")
+            {
+                newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                _meteors.Add(newMeteor);
+                _nextSpawnTime = Time.time + _spawnInterval;
+            }
+            else if (SceneManager.GetActiveScene().name == "Level2")
+            {
+                // Zufällige Auswahl zwischen normalem Meteor und FastMeteor
+                bool spawnFastMeteor = UnityEngine.Random.Range(0, 2) == 0; // 50% Chance für true
+                if (spawnFastMeteor)
+                {
+                    newMeteor = Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                }
+                _meteors.Add(newMeteor);
+                _nextSpawnTime = Time.time + _spawnInterval;
+            }
         }
     }
+
 
     void CheckAndRemoveMeteorsAtBottom()
     {
