@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Game Over!");
+        SceneManager.LoadScene(5);
     }
 
     private void TouchBabyDino()

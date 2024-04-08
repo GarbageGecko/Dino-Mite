@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelMenu.unity
     guid: 8a6e066b3ed5ec14ca711b8344c612e6
+  - enabled: 1
+    path: Assets/Scenes/DiedNosaur.unity
+    guid: 8986b7a3971d2be4c8d47787d7e10c81
+  - enabled: 1
+    path: Assets/Scenes/RawrSome.unity
+    guid: 6dfaf2467dd633348bee45cac706ae98
   m_configObjects: {}
