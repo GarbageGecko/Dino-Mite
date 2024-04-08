@@ -10,8 +10,8 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(1);              //Load Level 1
     }
 
-    public void OnQuitButton()
+    public void OnChangeLevel()
     {
-        Application.Quit();
+        SceneManager.LoadScene(4);
     }
 }
