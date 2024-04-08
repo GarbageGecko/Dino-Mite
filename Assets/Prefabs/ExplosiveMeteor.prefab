@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3918667622862432404}
   - component: {fileID: 5809437179776571312}
   - component: {fileID: 7810561270223928199}
-  - component: {fileID: -1729390983763611146}
+  - component: {fileID: 1619251241469587798}
   m_Layer: 0
-  m_Name: MeteorFast
+  m_Name: ExplosiveMeteor
   m_TagString: Meteor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.5803922, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.9372549, b: 0.23137255, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-1729390983763611146
+--- !u!114 &1619251241469587798
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6743303931657595209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c1883fb92caf2e4cbddfe2a7455bcaf, type: 3}
+  m_Script: {fileID: 11500000, guid: 26f90b344e4b0144f93e078e47ed42ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 5809437179776571312}
+  _smallMeteorPrefab: {fileID: 4797761523363811645, guid: b4828b32bf01ec14897f59fb4cb9dd0a, type: 3}

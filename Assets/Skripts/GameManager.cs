@@ -3,18 +3,17 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Meteor _meteorPrefab;
     [SerializeField] private Meteor _fastMeteorPrefab;
+    [SerializeField] private Meteor _explosiveMeteorPrefab;
+    [SerializeField] private SmallMeteor _smallMeteorPrefab;
     [SerializeField] private Player _playerPrefab;
     [SerializeField] private BabyDino _babyDinoPrefab;
     [SerializeField] private Transform _cam;
-
-
 
     private Dictionary<Vector2, Tile> _tiles;
     private List<Meteor> _meteors = new List<Meteor>();
@@ -22,19 +21,17 @@ public class GameManager : MonoBehaviour
     private float _nextSpawnTime = 0f;
     private float _spawnInterval = 1f;
     private bool _hasReachedBaby = false;
+    private string _activeSceneName;
 
     public int Width => _width;
     public int Height => _height;
-    public bool HasReachedBaby
-    {
-        get { return _hasReachedBaby; }
-        set { _hasReachedBaby = value; }
-    }
+    public bool HasReachedBaby { get => _hasReachedBaby; set => _hasReachedBaby = value; }
 
     void Start()
     {
         GenerateGrid();
         StartRound();
+        _activeSceneName = SceneManager.GetActiveScene().name;
     }
 
     void GenerateGrid()
@@ -55,8 +52,6 @@ public class GameManager : MonoBehaviour
         _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10);
     }
 
-
-
     void StartRound()
     {
         SpawnPlayer();
@@ -64,23 +59,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(MoveMeteorsDownCoroutine());
     }
 
-
     void SpawnPlayer()
     {
         var tile = GetTileAtPosition(new Vector2(0, 0));
-        if (tile != null)
-        {
-            _player = Instantiate(_playerPrefab, tile.transform.position, Quaternion.identity);
-        }
+        _player = Instantiate(_playerPrefab, tile.transform.position, Quaternion.identity);
     }
 
     void SpawnBabyDino()
     {
         var tile = GetTileAtPosition(new Vector2(_width - 1, 0));
-        if (tile != null)
-        {
-            Instantiate(_babyDinoPrefab, tile.transform.position, Quaternion.identity);
-        }
+        Instantiate(_babyDinoPrefab, tile.transform.position, Quaternion.identity);
     }
 
     void Update()
@@ -90,7 +78,7 @@ public class GameManager : MonoBehaviour
         if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
         {
             Debug.Log("You won!");
-            _hasReachedBaby = false; // Setze den Status zurück
+            _hasReachedBaby = false;
         }
     }
 
@@ -134,7 +122,6 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-
     void SpawnMeteorInRandomRow()
     {
         int randomX = UnityEngine.Random.Range(0, _width);
@@ -143,27 +130,26 @@ public class GameManager : MonoBehaviour
         {
             Meteor newMeteor;
 
-            if (SceneManager.GetActiveScene().name == "Level1")
+            switch (_activeSceneName)
             {
-                newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-                _meteors.Add(newMeteor);
-                _nextSpawnTime = Time.time + _spawnInterval;
-            }
-            else if (SceneManager.GetActiveScene().name == "Level2")
-            {
-                // Zufällige Auswahl zwischen normalem Meteor und FastMeteor
-                bool spawnFastMeteor = UnityEngine.Random.Range(0, 2) == 0; // 50% Chance für true
-                if (spawnFastMeteor)
-                {
-                    newMeteor = Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity);
-                }
-                else
-                {
+                case "Level1":
                     newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-                }
-                _meteors.Add(newMeteor);
-                _nextSpawnTime = Time.time + _spawnInterval;
+                    break;
+                case "Level2":
+                    bool spawnFastMeteor = UnityEngine.Random.Range(0, 2) == 0;
+                    newMeteor = spawnFastMeteor ? Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity) : Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                    break;
+                case "Level3":
+                    bool spawnExplosiveMeteor = UnityEngine.Random.Range(0, 10) < 3;
+                    newMeteor = spawnExplosiveMeteor ? Instantiate(_explosiveMeteorPrefab, tile.transform.position, Quaternion.identity) : UnityEngine.Random.Range(0, 2) == 0 ? Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity) : Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                    break;
+                default:
+                    newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                    break;
             }
+
+            _meteors.Add(newMeteor);
+            _nextSpawnTime = Time.time + _spawnInterval;
         }
     }
 
@@ -188,10 +174,6 @@ public class GameManager : MonoBehaviour
 
     public Tile GetTileAtPosition(Vector2 pos)
     {
-        if (_tiles.TryGetValue(pos, out var tile))
-        {
-            return tile;
-        }
-        return null;
+        return _tiles.TryGetValue(pos, out var tile) ? tile : null;
     }
 }

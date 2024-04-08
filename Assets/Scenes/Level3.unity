@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &213485665
+--- !u!1 &979192800
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,9 +131,63 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 213485668}
-  - component: {fileID: 213485667}
-  - component: {fileID: 213485666}
+  - component: {fileID: 979192802}
+  - component: {fileID: 979192801}
+  m_Layer: 0
+  m_Name: GM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &979192801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979192800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 699be2299a856924d838a5a3c3c17f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _width: 10
+  _height: 9
+  _tilePrefab: {fileID: 4365022665442942462, guid: 3d644087d61e4c748ba01e9e3a4dec43, type: 3}
+  _meteorPrefab: {fileID: 8217293873280094939, guid: b2a82bd16be7ea84382da04a0f036900, type: 3}
+  _fastMeteorPrefab: {fileID: -1729390983763611146, guid: 861ff86c01ede214e91159a2d7c9bc60, type: 3}
+  _explosiveMeteorPrefab: {fileID: 1619251241469587798, guid: ecd84e1d887a1144d8e5ab48d8fb9782, type: 3}
+  _smallMeteorPrefab: {fileID: 4797761523363811645, guid: b4828b32bf01ec14897f59fb4cb9dd0a, type: 3}
+  _playerPrefab: {fileID: 8610138532066405070, guid: fc949d4b0b6ab744eadc5e002fc6aad9, type: 3}
+  _babyDinoPrefab: {fileID: -1482826445393337024, guid: a4359494ac0462f4c9be796474640612, type: 3}
+  _cam: {fileID: 1963117486}
+--- !u!4 &979192802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979192800}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -36.295135, y: -1.5833735, z: -0.0048010033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1963117483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1963117486}
+  - component: {fileID: 1963117485}
+  - component: {fileID: 1963117484}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -141,21 +195,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &213485666
+--- !u!81 &1963117484
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213485665}
+  m_GameObject: {fileID: 1963117483}
   m_Enabled: 1
---- !u!20 &213485667
+--- !u!20 &1963117485
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213485665}
+  m_GameObject: {fileID: 1963117483}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -200,70 +254,16 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &213485668
+--- !u!4 &1963117486
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 213485665}
+  m_GameObject: {fileID: 1963117483}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1907457896
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1907457898}
-  - component: {fileID: 1907457897}
-  m_Layer: 0
-  m_Name: GM
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1907457897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907457896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 699be2299a856924d838a5a3c3c17f41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _width: 10
-  _height: 9
-  _tilePrefab: {fileID: 4365022665442942462, guid: 3d644087d61e4c748ba01e9e3a4dec43, type: 3}
-  _meteorPrefab: {fileID: 8217293873280094939, guid: b2a82bd16be7ea84382da04a0f036900, type: 3}
-  _fastMeteorPrefab: {fileID: -1729390983763611146, guid: 861ff86c01ede214e91159a2d7c9bc60, type: 3}
-  _explosiveMeteorPrefab: {fileID: 1619251241469587798, guid: ecd84e1d887a1144d8e5ab48d8fb9782, type: 3}
-  _smallMeteorPrefab: {fileID: 4797761523363811645, guid: b4828b32bf01ec14897f59fb4cb9dd0a, type: 3}
-  _playerPrefab: {fileID: 8610138532066405070, guid: fc949d4b0b6ab744eadc5e002fc6aad9, type: 3}
-  _babyDinoPrefab: {fileID: -1482826445393337024, guid: a4359494ac0462f4c9be796474640612, type: 3}
-  _cam: {fileID: 213485668}
---- !u!4 &1907457898
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1907457896}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.295135, y: -1.5833735, z: -0.0048010033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -273,5 +273,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 213485668}
-  - {fileID: 1907457898}
+  - {fileID: 1963117486}
+  - {fileID: 979192802}

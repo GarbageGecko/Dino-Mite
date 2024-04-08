@@ -172,6 +172,8 @@ MonoBehaviour:
   _tilePrefab: {fileID: 4365022665442942462, guid: 3d644087d61e4c748ba01e9e3a4dec43, type: 3}
   _meteorPrefab: {fileID: 8217293873280094939, guid: b2a82bd16be7ea84382da04a0f036900, type: 3}
   _fastMeteorPrefab: {fileID: -1729390983763611146, guid: 861ff86c01ede214e91159a2d7c9bc60, type: 3}
+  _explosiveMeteorPrefab: {fileID: 1619251241469587798, guid: ecd84e1d887a1144d8e5ab48d8fb9782, type: 3}
+  _smallMeteorPrefab: {fileID: 4797761523363811645, guid: b4828b32bf01ec14897f59fb4cb9dd0a, type: 3}
   _playerPrefab: {fileID: 8610138532066405070, guid: fc949d4b0b6ab744eadc5e002fc6aad9, type: 3}
   _babyDinoPrefab: {fileID: -1482826445393337024, guid: a4359494ac0462f4c9be796474640612, type: 3}
   _cam: {fileID: 1673059230}
