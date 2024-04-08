@@ -1,4 +1,5 @@
 using UnityEngine;
+//Baby Dino Skript
 
 public class BabyDino : MonoBehaviour
 {

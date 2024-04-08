@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+//Game manager skript
 
 public class GameManager : MonoBehaviour
 {

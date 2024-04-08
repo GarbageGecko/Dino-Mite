@@ -1,4 +1,5 @@
 using UnityEngine;
+//meteor skript
 
 public class Meteor : MonoBehaviour
 {

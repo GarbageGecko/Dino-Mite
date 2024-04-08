@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//player skript
 
 public class Player : MonoBehaviour
 {

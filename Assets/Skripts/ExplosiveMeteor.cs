@@ -1,4 +1,5 @@
 using UnityEngine;
+// explosive Meteor skript
 
 public class ExplosiveMeteor : Meteor
 {
