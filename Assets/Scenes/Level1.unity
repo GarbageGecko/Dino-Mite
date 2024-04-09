@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _width: 19
-  _height: 5
+  _height: 10
   _tilePrefab: {fileID: 4365022665442942462, guid: 3d644087d61e4c748ba01e9e3a4dec43, type: 3}
   _meteorPrefab: {fileID: 8217293873280094939, guid: b2a82bd16be7ea84382da04a0f036900, type: 3}
   _fastMeteorPrefab: {fileID: -1729390983763611146, guid: 861ff86c01ede214e91159a2d7c9bc60, type: 3}

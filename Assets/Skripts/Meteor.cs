@@ -7,6 +7,6 @@ public class Meteor : MonoBehaviour
 
     public virtual void MoveDown()
     {
-        _rigidbody.MovePosition(transform.position + new Vector3(0, -1, 0));
+        _rigidbody.MovePosition(transform.position + new Vector3(0, -2, 0));
     }
 }

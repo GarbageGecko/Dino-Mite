@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
             if (targetTile != null && targetTile.transform.position.y == 0)
             {
                 float horizontalDifference = targetTile.transform.position.x - _currentTilePosition.x;
-                if (Mathf.Abs(horizontalDifference) == 1)
+                if (Mathf.Abs(horizontalDifference) == 2)
                 {
                     MoveToTile(targetTile);
                 }

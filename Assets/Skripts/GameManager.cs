@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
     void GenerateGrid()
     {
         _tiles = new Dictionary<Vector2, Tile>();
-        for (int x = 0; x < _width; x++)
+        for (int x = 0; x < _width; x+=2)
         {
-            for (int y = 0; y < _height; y++)
+            for (int y = 0; y < _height; y+=2)
             {
                 var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile: {x} {y}";
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
             {
                 Vector2 targetPosition = _player.CurrentTilePosition + new Vector2(horizontalInput, 0);
                 var targetTile = GetTileAtPosition(targetPosition);
-                if (targetTile != null && targetTile.transform.position.y == 0 && Mathf.Abs(horizontalInput) == 1)
+                if (targetTile != null && targetTile.transform.position.y == 0 && Mathf.Abs(horizontalInput) == 2)
                 {
                     _player.MoveToTile(targetTile);
                 }
