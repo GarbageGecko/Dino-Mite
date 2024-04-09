@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MoveMeteorsDownCoroutine()
     {
+        Debug.Log("MoveMeteorsDownCoroutine started.");
         while (true)
         {
             yield return new WaitUntil(() => _player.HasMoved);
