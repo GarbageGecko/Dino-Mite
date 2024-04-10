@@ -106,9 +106,10 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitUntil(() => _player.HasMoved);
-
+            
             if (Time.time >= _nextSpawnTime)
             {
+                Debug.Log("SpawnMeteorInRandomRow has been reached");
                 SpawnMeteorInRandomRow();
             }
 
@@ -126,8 +127,9 @@ public class GameManager : MonoBehaviour
     }
     void SpawnMeteorInRandomRow()
     {
+        Debug.Log("SpawnMeteorInRandomRow started");
         int randomX = UnityEngine.Random.Range(0, _width);
-        var tile = GetTileAtPosition(new Vector2(randomX, _height - 1));
+        var tile = GetTileAtPosition(new Vector2(randomX, _height - 2));
         if (tile != null)
         {
             Meteor newMeteor;
@@ -135,6 +137,7 @@ public class GameManager : MonoBehaviour
             switch (_activeSceneName)
             {
                 case "Level1":
+                    Debug.Log("Level 1 Meteoriten wurden gestartet");
                     newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
                     break;
                 case "Level2":

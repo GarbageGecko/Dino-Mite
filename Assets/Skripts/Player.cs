@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private bool _hasMoved = false;
 
     public Vector2 CurrentTilePosition => _currentTilePosition;
+    
     public bool HasMoved
     {
         get { return _hasMoved; }
