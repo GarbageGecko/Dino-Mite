@@ -14,7 +14,7 @@ public class ExplosiveMeteor : Meteor
 
     public override void MoveDown()
     {
-        _rigidbody.MovePosition(transform.position + new Vector3(0, -1, 0)); // Bewegt den ExplosiveMeteor um ein Feld nach unten
+        _rigidbody.MovePosition(transform.position + new Vector3(0, -2, 0)); // Bewegt den ExplosiveMeteor um ein Feld nach unten
 
         // Überprüfen, ob der ExplosiveMeteor ganz unten angekommen ist
         if (transform.position.y <= 0)
@@ -26,9 +26,9 @@ public class ExplosiveMeteor : Meteor
 
     private void SpawnSmallMeteors()
     {
-        Vector3 leftSpawnPosition = transform.position + new Vector3(-1, 0, 0);
+        Vector3 leftSpawnPosition = transform.position + new Vector3(-2, 0, 0);
         Vector3 middleSpawnPosition = transform.position + new Vector3(0, 0, 0);
-        Vector3 rightSpawnPosition = transform.position + new Vector3(1, 0, 0);
+        Vector3 rightSpawnPosition = transform.position + new Vector3(2, 0, 0);
 
         // Überprüfung ob die Spawn-Positionen innerhalb des Grids liegen
         if (IsWithinGrid(leftSpawnPosition))
