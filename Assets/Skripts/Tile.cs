@@ -16,11 +16,13 @@ public class Tile : MonoBehaviour
         _renderer.color = isOffset ? _offsetColor : _baseColor;
     }
 
-    void OnMouseEnter(){
+    void OnMouseEnter()
+    {
         _highlight.SetActive(true);
     }
 
-     void OnMouseExit(){
+    void OnMouseExit()
+    {
         _highlight.SetActive(false);
     }
 }
