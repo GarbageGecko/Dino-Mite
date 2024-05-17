@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _playerPrefab;
     [SerializeField] private BabyDino _babyDinoPrefab;
     [SerializeField] private Transform _cam;
+     private List<GameObject> _meteorPreviews = new List<GameObject>();
+     [SerializeField] private GameObject _meteorPreviewPrefab;
 
     private Dictionary<Vector2, Tile> _tiles;
     private List<Meteor> _meteors = new List<Meteor>();
@@ -81,8 +83,78 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(6);
             _hasReachedBaby = false;
         }
+        DisplayMeteorPreviews();
+    }
+void DisplayMeteorPreviews()
+{
+    ClearMeteorPreviews(); // Vorherige Vorschau löschen
+
+    foreach (var meteor in _meteors)
+    {
+        // Standard-Vorschau für normale und FastMeteor-Meteoriten
+        Vector2 nextPosition = GetNextMeteorPosition(meteor);
+        GameObject previewObject = Instantiate(_meteorPreviewPrefab, nextPosition, Quaternion.identity);
+        _meteorPreviews.Add(previewObject);
+
+        // Überprüfen, ob es sich um einen explosiven Meteor handelt
+        if (meteor.GetType() == typeof(ExplosiveMeteor))
+        {
+            ExplosiveMeteor explosiveMeteor = (ExplosiveMeteor)meteor;
+
+            // Überprüfen, ob der Explosivmeteor ganz unten ist
+            if (Mathf.Approximately(explosiveMeteor.transform.position.y, 0))
+            {
+                List<Vector2> smallMeteorPositions = GetSmallMeteorPositions(explosiveMeteor);
+                foreach (var smallMeteorPosition in smallMeteorPositions)
+                {
+                    // Vorschau für kleine Meteoriten anzeigen
+                    GameObject smallMeteorPreview = Instantiate(_meteorPreviewPrefab, smallMeteorPosition, Quaternion.identity);
+                    _meteorPreviews.Add(smallMeteorPreview);
+                }
+            }
+        }
+    }
+}
+
+// Berechnet die Positionen der kleinen Meteoriten, die entstehen, wenn ein Explosiver Meteor auftrifft
+List<Vector2> GetSmallMeteorPositions(ExplosiveMeteor explosiveMeteor)
+{
+    List<Vector2> smallMeteorPositions = new List<Vector2>();
+
+    Vector2 explosivePosition = explosiveMeteor.transform.position;
+    smallMeteorPositions.Add(explosivePosition + new Vector2(-2, 0)); // Links vom Explosiven Meteor
+    smallMeteorPositions.Add(explosivePosition + new Vector2(2, 0)); // Rechts vom Explosiven Meteor
+
+    return smallMeteorPositions;
+}
+
+
+  // Berechnet die nächste Position eines Meteoriten basierend auf seiner aktuellen Position und Typ
+Vector2 GetNextMeteorPosition(Meteor meteor)
+{
+    Vector2 currentPosition = meteor.transform.position;
+    float moveDistance = 2; // Standard-Bewegungsentfernung
+
+    // Überprüfen, ob es sich um einen FastMeteor handelt
+    if (meteor.GetType() == typeof(FastMeteor))
+    {
+        moveDistance = 4; // Bei FastMeteor ist die Bewegungsdistanz verdoppelt
     }
 
+    Vector2 nextPosition = currentPosition + new Vector2(0, -moveDistance);
+    return nextPosition;
+}
+
+
+    // Löscht die Vorschau-GameObjecte der Meteoritenbewegung
+    void ClearMeteorPreviews()
+    {
+        foreach (var preview in _meteorPreviews)
+        {
+            Destroy(preview);
+        }
+        _meteorPreviews.Clear();
+    }
     void HandlePlayerInput()
     {
         if (_player != null)

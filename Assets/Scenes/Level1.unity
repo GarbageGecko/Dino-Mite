@@ -177,6 +177,7 @@ MonoBehaviour:
   _playerPrefab: {fileID: 8610138532066405070, guid: fc949d4b0b6ab744eadc5e002fc6aad9, type: 3}
   _babyDinoPrefab: {fileID: -1482826445393337024, guid: a4359494ac0462f4c9be796474640612, type: 3}
   _cam: {fileID: 1673059230}
+  _meteorPreviewPrefab: {fileID: 6743303931657595209, guid: a5138119e163d65459dfc6246781399b, type: 3}
 --- !u!1 &1673059227
 GameObject:
   m_ObjectHideFlags: 0
