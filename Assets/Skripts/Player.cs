@@ -52,6 +52,7 @@ public class Player : MonoBehaviour
         _currentTilePosition = new Vector2(targetTile.transform.position.x, targetTile.transform.position.y);
         transform.position = targetTile.transform.position;
         _hasMoved = true;
+           _gridManager.SpawnMeteorInRandomRow();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

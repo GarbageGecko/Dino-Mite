@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-//Game manager skript
 
 public class GameManager : MonoBehaviour
 {
@@ -15,8 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player _playerPrefab;
     [SerializeField] private BabyDino _babyDinoPrefab;
     [SerializeField] private Transform _cam;
-     private List<GameObject> _meteorPreviews = new List<GameObject>();
-     [SerializeField] private GameObject _meteorPreviewPrefab;
+    private List<GameObject> _meteorPreviews = new List<GameObject>();
+    [SerializeField] private GameObject _meteorPreviewPrefab;
 
     private Dictionary<Vector2, Tile> _tiles;
     private List<Meteor> _meteors = new List<Meteor>();
@@ -40,9 +39,9 @@ public class GameManager : MonoBehaviour
     void GenerateGrid()
     {
         _tiles = new Dictionary<Vector2, Tile>();
-        for (int x = 0; x < _width; x+=2)
+        for (int x = 0; x < _width; x += 2)
         {
-            for (int y = 0; y < _height; y+=2)
+            for (int y = 0; y < _height; y += 2)
             {
                 var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile: {x} {y}";
@@ -65,7 +64,10 @@ public class GameManager : MonoBehaviour
     void SpawnPlayer()
     {
         var tile = GetTileAtPosition(new Vector2(0, 0));
-        _player = Instantiate(_playerPrefab, tile.transform.position, Quaternion.identity);
+        if (tile != null)
+        {
+            _player = Instantiate(_playerPrefab, tile.transform.position, Quaternion.identity);
+        }
     }
 
     void SpawnBabyDino()
@@ -85,66 +87,65 @@ public class GameManager : MonoBehaviour
         }
         DisplayMeteorPreviews();
     }
-void DisplayMeteorPreviews()
-{
-    ClearMeteorPreviews(); // Vorherige Vorschau löschen
 
-    foreach (var meteor in _meteors)
+    void DisplayMeteorPreviews()
     {
-        // Standard-Vorschau für normale und FastMeteor-Meteoriten
-        Vector2 nextPosition = GetNextMeteorPosition(meteor);
-        GameObject previewObject = Instantiate(_meteorPreviewPrefab, nextPosition, Quaternion.identity);
-        _meteorPreviews.Add(previewObject);
+        ClearMeteorPreviews(); // Vorherige Vorschau löschen
 
-        // Überprüfen, ob es sich um einen explosiven Meteor handelt
-        if (meteor.GetType() == typeof(ExplosiveMeteor))
+        foreach (var meteor in _meteors)
         {
-            ExplosiveMeteor explosiveMeteor = (ExplosiveMeteor)meteor;
+            // Standard-Vorschau für normale und FastMeteor-Meteoriten
+            Vector2 nextPosition = GetNextMeteorPosition(meteor);
+            GameObject previewObject = Instantiate(_meteorPreviewPrefab, nextPosition, Quaternion.identity);
+            _meteorPreviews.Add(previewObject);
 
-            // Überprüfen, ob der Explosivmeteor ganz unten ist
-            if (Mathf.Approximately(explosiveMeteor.transform.position.y, 0))
+            // Überprüfen, ob es sich um einen explosiven Meteor handelt
+            if (meteor.GetType() == typeof(ExplosiveMeteor))
             {
-                List<Vector2> smallMeteorPositions = GetSmallMeteorPositions(explosiveMeteor);
-                foreach (var smallMeteorPosition in smallMeteorPositions)
+                ExplosiveMeteor explosiveMeteor = (ExplosiveMeteor)meteor;
+
+                // Überprüfen, ob der Explosivmeteor ganz unten ist
+                if (Mathf.Approximately(explosiveMeteor.transform.position.y, 0))
                 {
-                    // Vorschau für kleine Meteoriten anzeigen
-                    GameObject smallMeteorPreview = Instantiate(_meteorPreviewPrefab, smallMeteorPosition, Quaternion.identity);
-                    _meteorPreviews.Add(smallMeteorPreview);
+                    List<Vector2> smallMeteorPositions = GetSmallMeteorPositions(explosiveMeteor);
+                    foreach (var smallMeteorPosition in smallMeteorPositions)
+                    {
+                        // Vorschau für kleine Meteoriten anzeigen
+                        GameObject smallMeteorPreview = Instantiate(_meteorPreviewPrefab, smallMeteorPosition, Quaternion.identity);
+                        _meteorPreviews.Add(smallMeteorPreview);
+                    }
                 }
             }
         }
     }
-}
 
-// Berechnet die Positionen der kleinen Meteoriten, die entstehen, wenn ein Explosiver Meteor auftrifft
-List<Vector2> GetSmallMeteorPositions(ExplosiveMeteor explosiveMeteor)
-{
-    List<Vector2> smallMeteorPositions = new List<Vector2>();
-
-    Vector2 explosivePosition = explosiveMeteor.transform.position;
-    smallMeteorPositions.Add(explosivePosition + new Vector2(-2, 0)); // Links vom Explosiven Meteor
-    smallMeteorPositions.Add(explosivePosition + new Vector2(2, 0)); // Rechts vom Explosiven Meteor
-
-    return smallMeteorPositions;
-}
-
-
-  // Berechnet die nächste Position eines Meteoriten basierend auf seiner aktuellen Position und Typ
-Vector2 GetNextMeteorPosition(Meteor meteor)
-{
-    Vector2 currentPosition = meteor.transform.position;
-    float moveDistance = 2; // Standard-Bewegungsentfernung
-
-    // Überprüfen, ob es sich um einen FastMeteor handelt
-    if (meteor.GetType() == typeof(FastMeteor))
+    // Berechnet die Positionen der kleinen Meteoriten, die entstehen, wenn ein Explosiver Meteor auftrifft
+    List<Vector2> GetSmallMeteorPositions(ExplosiveMeteor explosiveMeteor)
     {
-        moveDistance = 4; // Bei FastMeteor ist die Bewegungsdistanz verdoppelt
+        List<Vector2> smallMeteorPositions = new List<Vector2>();
+
+        Vector2 explosivePosition = explosiveMeteor.transform.position;
+        smallMeteorPositions.Add(explosivePosition + new Vector2(-2, 0)); // Links vom Explosiven Meteor
+        smallMeteorPositions.Add(explosivePosition + new Vector2(2, 0)); // Rechts vom Explosiven Meteor
+
+        return smallMeteorPositions;
     }
 
-    Vector2 nextPosition = currentPosition + new Vector2(0, -moveDistance);
-    return nextPosition;
-}
+    // Berechnet die nächste Position eines Meteoriten basierend auf seiner aktuellen Position und Typ
+    Vector2 GetNextMeteorPosition(Meteor meteor)
+    {
+        Vector2 currentPosition = meteor.transform.position;
+        float moveDistance = 2; // Standard-Bewegungsentfernung
 
+        // Überprüfen, ob es sich um einen FastMeteor handelt
+        if (meteor.GetType() == typeof(FastMeteor))
+        {
+            moveDistance = 4; // Bei FastMeteor ist die Bewegungsdistanz verdoppelt
+        }
+
+        Vector2 nextPosition = currentPosition + new Vector2(0, -moveDistance);
+        return nextPosition;
+    }
 
     // Löscht die Vorschau-GameObjecte der Meteoritenbewegung
     void ClearMeteorPreviews()
@@ -155,6 +156,7 @@ Vector2 GetNextMeteorPosition(Meteor meteor)
         }
         _meteorPreviews.Clear();
     }
+
     void HandlePlayerInput()
     {
         if (_player != null)
@@ -172,35 +174,38 @@ Vector2 GetNextMeteorPosition(Meteor meteor)
         }
     }
 
-    IEnumerator MoveMeteorsDownCoroutine()
+IEnumerator MoveMeteorsDownCoroutine()
+{
+    Debug.Log("MoveMeteorsDownCoroutine started.");
+    while (true)
     {
-        Debug.Log("MoveMeteorsDownCoroutine started.");
-        while (true)
+        yield return new WaitUntil(() => _player.HasMoved);
+
+        SpawnMeteorInRandomRow();
+
+        foreach (var meteor in _meteors)
         {
-            yield return new WaitUntil(() => _player.HasMoved);
-            
-            if (Time.time >= _nextSpawnTime)
-            {
-                Debug.Log("SpawnMeteorInRandomRow has been reached");
-                SpawnMeteorInRandomRow();
-            }
-
-            foreach (var meteor in _meteors)
-            {
-                meteor.MoveDown();
-            }
-
-            CheckAndRemoveMeteorsAtBottom();
-
-            _player.HasMoved = false;
-
-            yield return new WaitForSeconds(1f);
+            meteor.MoveDown();
         }
+
+        CheckAndRemoveMeteorsAtBottom();
+
+        _player.HasMoved = false;
+
+        yield return null; // Jetzt nicht mehr warten, sondern direkt fortfahren
     }
-    void SpawnMeteorInRandomRow()
+}
+
+
+
+  public void SpawnMeteorInRandomRow()
+{
+    Debug.Log("SpawnMeteorInRandomRow started");
+    int randomX = UnityEngine.Random.Range(0, _width);
+    
+    // Prüfen, ob die aktuelle Spalte nicht die letzte Spalte ist
+    if (randomX != _width - 1)
     {
-        Debug.Log("SpawnMeteorInRandomRow started");
-        int randomX = UnityEngine.Random.Range(0, _width);
         var tile = GetTileAtPosition(new Vector2(randomX, _height - 2));
         if (tile != null)
         {
@@ -229,7 +234,7 @@ Vector2 GetNextMeteorPosition(Meteor meteor)
             _nextSpawnTime = Time.time + _spawnInterval;
         }
     }
-
+}
 
     void CheckAndRemoveMeteorsAtBottom()
     {
