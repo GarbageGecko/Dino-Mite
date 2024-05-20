@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; } // Singleton instance
+
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Meteor _meteorPrefab;
@@ -29,6 +31,18 @@ public class GameManager : MonoBehaviour
     public int Height => _height;
     public bool HasReachedBaby { get => _hasReachedBaby; set => _hasReachedBaby = value; }
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         GenerateGrid();
@@ -46,7 +60,7 @@ public class GameManager : MonoBehaviour
                 var spawnedTile = Instantiate(_tilePrefab, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile: {x} {y}";
                 var isOffset = (x % 2 == 0 && y % 2 != 0) || (x % 2 != 0 && y % 2 == 0);
-                spawnedTile.Init(isOffset);
+                spawnedTile.Init(isOffset, y); // Pass the y-coordinate (height)
                 _tiles[new Vector2(x, y)] = spawnedTile;
             }
         }
@@ -86,6 +100,18 @@ public class GameManager : MonoBehaviour
             _hasReachedBaby = false;
         }
         DisplayMeteorPreviews();
+    }
+
+    public void OnTileClicked(Tile tile)
+    {
+        if (_player != null && tile.transform.position.y == 0)
+        {
+            Vector2 targetPosition = tile.Position;
+            if (Vector2.Distance(targetPosition, _player.CurrentTilePosition) == 2) // Ensuring only 1 tile move horizontally
+            {
+                _player.MoveToTile(tile);
+            }
+        }
     }
 
     void DisplayMeteorPreviews()
@@ -164,9 +190,9 @@ public class GameManager : MonoBehaviour
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             if (horizontalInput != 0)
             {
-                Vector2 targetPosition = _player.CurrentTilePosition + new Vector2(horizontalInput, 0);
+                Vector2 targetPosition = _player.CurrentTilePosition + new Vector2(horizontalInput * 2, 0);
                 var targetTile = GetTileAtPosition(targetPosition);
-                if (targetTile != null && targetTile.transform.position.y == 0 && Mathf.Abs(horizontalInput) == 2)
+                if (targetTile != null && targetTile.transform.position.y == 0)
                 {
                     _player.MoveToTile(targetTile);
                 }
@@ -174,35 +200,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
-IEnumerator MoveMeteorsDownCoroutine()
-{
-    Debug.Log("MoveMeteorsDownCoroutine started.");
-    while (true)
+    IEnumerator MoveMeteorsDownCoroutine()
     {
-        yield return new WaitUntil(() => _player.HasMoved);
-
-        SpawnMeteorInRandomRow();
-
-        foreach (var meteor in _meteors)
+        Debug.Log("MoveMeteorsDownCoroutine started.");
+        while (true)
         {
-            meteor.MoveDown();
+            yield return new WaitUntil(() => _player.HasMoved);
+
+            SpawnMeteorInRandomRow();
+
+            foreach (var meteor in _meteors)
+            {
+                meteor.MoveDown();
+            }
+
+            CheckAndRemoveMeteorsAtBottom();
+
+            _player.HasMoved = false;
+
+            yield return null; // Jetzt nicht mehr warten, sondern direkt fortfahren
         }
-
-        CheckAndRemoveMeteorsAtBottom();
-
-        _player.HasMoved = false;
-
-        yield return null; // Jetzt nicht mehr warten, sondern direkt fortfahren
     }
-}
 
-
-
-  public void SpawnMeteorInRandomRow()
+    public void SpawnMeteorInRandomRow()
 {
     Debug.Log("SpawnMeteorInRandomRow started");
-    int randomX = UnityEngine.Random.Range(0, _width);
-    
+    int randomX = UnityEngine.Random.Range(0, _width / 2) * 2; // Stelle sicher, dass die zufällige X-Position gerade ist
+
     // Prüfen, ob die aktuelle Spalte nicht die letzte Spalte ist
     if (randomX != _width - 1)
     {
@@ -235,6 +259,7 @@ IEnumerator MoveMeteorsDownCoroutine()
         }
     }
 }
+
 
     void CheckAndRemoveMeteorsAtBottom()
     {
