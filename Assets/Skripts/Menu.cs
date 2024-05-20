@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
 {
     public void OnPlayButton()
     {
-        SceneManager.LoadScene(1);              //Load Level 1
+        SceneManager.LoadScene(7);              //Load Level 1
     }
 
     public void OnChangeLevel()

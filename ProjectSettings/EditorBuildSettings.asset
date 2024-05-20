@@ -26,4 +26,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RawrSome.unity
     guid: 6dfaf2467dd633348bee45cac706ae98
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 1.unity
+    guid: 51ce8d122af35c147af4805b3785d246
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 2.unity
+    guid: cb8f8a56dc21c3d45b3a4cde68fbe45a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 3.unity
+    guid: fcaf00104b72bed429e799013beb3542
   m_configObjects: {}
