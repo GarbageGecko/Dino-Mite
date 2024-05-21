@@ -7,7 +7,22 @@ public class RawrSome : MonoBehaviour
 {
     public void OnNextLevel ()
     {
-        SceneManager.LoadScene(2);
+        // Get the current active scene
+        string currentScene = GameManager._activeSceneName;
+
+        // Determine the next scene to load based on the current scene
+        switch (currentScene.ToLower())
+        {
+            case "level1":
+                SceneManager.LoadScene(2); // Load Level 2 if Level 1 was completed
+                break;
+            case "level2":
+                SceneManager.LoadScene(3); // Load Level 3 if Level 2 was completed
+                break;
+            default:
+                Debug.Log("No next level defined for this level");
+                break;
+        }
     }
 
     public void OnMenu ()

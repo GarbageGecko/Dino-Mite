@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
 
     private void TouchBabyDino()
     {
-        Debug.Log("You've reached the Baby Dino!");
+        //Debug.Log("You've reached the Baby Dino!");
         BabyDino babyDino = FindObjectOfType<BabyDino>();
         if (babyDino != null)
         {

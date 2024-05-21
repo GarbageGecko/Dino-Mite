@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private float _nextSpawnTime = 0f;
     private float _spawnInterval = 1f;
     private bool _hasReachedBaby = false;
-    private string _activeSceneName;
+    static public string _activeSceneName;
 
     public int Width => _width;
     public int Height => _height;
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MoveMeteorsDownCoroutine()
     {
-        Debug.Log("MoveMeteorsDownCoroutine started.");
+       // Debug.Log("MoveMeteorsDownCoroutine started.");
         while (true)
         {
             yield return new WaitUntil(() => _player.HasMoved);
@@ -223,42 +223,42 @@ public class GameManager : MonoBehaviour
     }
 
     public void SpawnMeteorInRandomRow()
-{
-    Debug.Log("SpawnMeteorInRandomRow started");
-    int randomX = UnityEngine.Random.Range(0, _width / 2) * 2; // Stelle sicher, dass die zufällige X-Position gerade ist
-
-    // Prüfen, ob die aktuelle Spalte nicht die letzte Spalte ist
-    if (randomX != _width - 1)
     {
-        var tile = GetTileAtPosition(new Vector2(randomX, _height - 2));
-        if (tile != null)
+       // Debug.Log("SpawnMeteorInRandomRow started");
+        int randomX = UnityEngine.Random.Range(0, _width / 2) * 2; // Stelle sicher, dass die zufällige X-Position gerade ist
+
+        // Prüfen, ob die aktuelle Spalte nicht die letzte Spalte ist
+        if (randomX != _width - 1)
         {
-            Meteor newMeteor;
-
-            switch (_activeSceneName)
+            var tile = GetTileAtPosition(new Vector2(randomX, _height - 2));
+            if (tile != null)
             {
-                case "Level1":
-                    Debug.Log("Level 1 Meteoriten wurden gestartet");
-                    newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-                    break;
-                case "Level2":
-                    bool spawnFastMeteor = UnityEngine.Random.Range(0, 2) == 0;
-                    newMeteor = spawnFastMeteor ? Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity) : Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-                    break;
-                case "Level3":
-                    bool spawnExplosiveMeteor = UnityEngine.Random.Range(0, 10) < 3;
-                    newMeteor = spawnExplosiveMeteor ? Instantiate(_explosiveMeteorPrefab, tile.transform.position, Quaternion.identity) : UnityEngine.Random.Range(0, 2) == 0 ? Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity) : Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-                    break;
-                default:
-                    newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
-                    break;
-            }
+                Meteor newMeteor;
 
-            _meteors.Add(newMeteor);
-            _nextSpawnTime = Time.time + _spawnInterval;
+                switch (_activeSceneName)
+                {
+                    case "Level1":
+                       // Debug.Log("Level 1 Meteoriten wurden gestartet");
+                        newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                        break;
+                    case "Level2":
+                        bool spawnFastMeteor = UnityEngine.Random.Range(0, 2) == 0;
+                        newMeteor = spawnFastMeteor ? Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity) : Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                        break;
+                    case "Level3":
+                        bool spawnExplosiveMeteor = UnityEngine.Random.Range(0, 10) < 3;
+                        newMeteor = spawnExplosiveMeteor ? Instantiate(_explosiveMeteorPrefab, tile.transform.position, Quaternion.identity) : UnityEngine.Random.Range(0, 2) == 0 ? Instantiate(_fastMeteorPrefab, tile.transform.position, Quaternion.identity) : Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                        break;
+                    default:
+                        newMeteor = Instantiate(_meteorPrefab, tile.transform.position, Quaternion.identity);
+                        break;
+                }
+
+                _meteors.Add(newMeteor);
+                _nextSpawnTime = Time.time + _spawnInterval;
+            }
         }
     }
-}
 
 
     void CheckAndRemoveMeteorsAtBottom()
