@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
     public int Height => _height;
     public bool HasReachedBaby { get => _hasReachedBaby; set => _hasReachedBaby = value; }
 
+    public static int scoreValue = 0;
+    public Text score;
+
     void Awake()
     {
         if (Instance == null)
@@ -48,6 +52,7 @@ public class GameManager : MonoBehaviour
         GenerateGrid();
         StartRound();
         _activeSceneName = SceneManager.GetActiveScene().name;
+        score = GetComponent<Text> ();
     }
 
     void GenerateGrid()
@@ -100,6 +105,8 @@ public class GameManager : MonoBehaviour
             _hasReachedBaby = false;
         }
         DisplayMeteorPreviews();
+
+        score.text = "Score: " + scoreValue;
     }
 
     public void OnTileClicked(Tile tile)
@@ -195,6 +202,7 @@ public class GameManager : MonoBehaviour
                 if (targetTile != null && targetTile.transform.position.y == 0)
                 {
                     _player.MoveToTile(targetTile);
+                    scoreValue += 1;
                 }
             }
         }

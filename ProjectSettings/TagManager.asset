@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Meteor
   - BabyDino
+  - Tile
   layers:
   - Default
   - TransparentFX
