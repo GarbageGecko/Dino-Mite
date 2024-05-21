@@ -49,13 +49,15 @@ public class ExplosiveMeteor : Meteor
 
     }
 
-    private bool IsWithinGrid(Vector3 position)
-    {
-        int x = Mathf.RoundToInt(position.x);
-        int y = Mathf.RoundToInt(position.y);
+  private bool IsWithinGrid(Vector3 position)
+{
+    int x = Mathf.RoundToInt(position.x);
+    int y = Mathf.RoundToInt(position.y);
 
-        return x >= 0 && x < _gameManager.Width && y >= 0 && y < _gameManager.Height;
-    }
+    // Überprüfung, ob die Position innerhalb des Grids liegt und nicht in der letzten Spalte
+    return x >= 0 && x < _gameManager.Width - 1 && y >= 0 && y < _gameManager.Height;
+}
+
 
 }
 

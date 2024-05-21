@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//tile skript
 
 public class Tile : MonoBehaviour
 {
@@ -10,19 +8,34 @@ public class Tile : MonoBehaviour
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
 
+    private int _height; // Add a variable to store the height
+    public Vector2 Position => transform.position; // Add a property to get the tile's position
 
-    public void Init(bool isOffset)
+    // Modify the Init method to accept height
+    public void Init(bool isOffset, int height)
     {
         _renderer.color = isOffset ? _offsetColor : _baseColor;
+        _height = height; // Store the height
     }
 
     void OnMouseEnter()
     {
-        _highlight.SetActive(true);
+        if (_height == 0) // Only highlight if this is the bottom row
+        {
+            _highlight.SetActive(true);
+        }
     }
 
     void OnMouseExit()
     {
-        _highlight.SetActive(false);
+        if (_height == 0) // Only un-highlight if this is the bottom row
+        {
+            _highlight.SetActive(false);
+        }
+    }
+
+    void OnMouseDown()
+    {
+        GameManager.Instance.OnTileClicked(this);
     }
 }
