@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public Sprite newSprite;
     private Vector2 _currentTilePosition;
     private Camera _mainCamera;
     private GameManager _gridManager;
@@ -75,11 +77,13 @@ public class Player : MonoBehaviour
 
     private void TouchBabyDino()
     {
+         gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
         //Debug.Log("You've reached the Baby Dino!");
         BabyDino babyDino = FindObjectOfType<BabyDino>();
         if (babyDino != null)
         {
-            babyDino.StartFollowingPlayer();
+            Destroy(babyDino);
+            
             FindObjectOfType<GameManager>().HasReachedBaby = true;
         }
     }

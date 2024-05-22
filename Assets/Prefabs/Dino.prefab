@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2674507405231293266}
   - component: {fileID: 5796058150074909157}
   - component: {fileID: 8610138532066405070}
+  - component: {fileID: 3622229275875601003}
   m_Layer: 0
   m_Name: Dino
   m_TagString: Untagged
@@ -19,21 +20,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7229737801579027928
-Transform:
+--- !u!224 &7229737801579027928
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4766409717962944183}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5365, y: -2.4211, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.46938258, y: 0.42135078, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -35.5365, y: -2.4211}
+  m_SizeDelta: {x: 8.98, y: 6.49}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &2674507405231293266
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -143,3 +148,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad8bbcaa865a6d4289b915cfd860d21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  oldSprite: {fileID: 0}
+  newSprite: {fileID: 21300000, guid: d0d5f3391e747fa4daefb1d31a8a31a3, type: 3}
+--- !u!222 &3622229275875601003
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766409717962944183}
+  m_CullTransparentMesh: 1
