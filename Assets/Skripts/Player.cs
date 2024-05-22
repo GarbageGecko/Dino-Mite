@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         transform.position = targetTile.transform.position;
         _hasMoved = true;
 
-        GameManager.scoreValue += 1;
+        GameManager.moveValue += 1;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
     private void GameOver()
     {
         SceneManager.LoadScene(5);
+        GameManager.moveValue=0;
     }
 
     private void TouchBabyDino()

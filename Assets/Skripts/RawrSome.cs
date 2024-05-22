@@ -20,7 +20,9 @@ public class RawrSome : MonoBehaviour
                 SceneManager.LoadScene(3); // Load Level 3 if Level 2 was completed
                 break;
             default:
-                Debug.Log("No next level defined for this level");
+                 SceneManager.LoadScene(0);
+                 Debug.Log("No next level defined for this level");
+               
                 break;
         }
     }
@@ -28,5 +30,10 @@ public class RawrSome : MonoBehaviour
     public void OnMenu ()
     {
         SceneManager.LoadScene(0);
+    }
+
+      public void OnHighscore ()
+    {
+         SceneManager.LoadScene("HighScoreScene");
     }
 }

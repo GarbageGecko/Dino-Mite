@@ -177,8 +177,10 @@ MonoBehaviour:
   _playerPrefab: {fileID: 8610138532066405070, guid: fc949d4b0b6ab744eadc5e002fc6aad9, type: 3}
   _babyDinoPrefab: {fileID: -1482826445393337024, guid: a4359494ac0462f4c9be796474640612, type: 3}
   _cam: {fileID: 1673059230}
-  _meteorPreviewPrefab: {fileID: 6743303931657595209, guid: a5138119e163d65459dfc6246781399b, type: 3}
-  score: {fileID: 0}
+  _normalMeteorPreviewPrefab: {fileID: 6743303931657595209, guid: a5138119e163d65459dfc6246781399b, type: 3}
+  _fastMeteorPreviewPrefab: {fileID: 7774871288557484367, guid: 55dc38e764d643e4caa142c11e1375d3, type: 3}
+  _explosiveMeteorPreviewPrefab: {fileID: 0}
+  move: {fileID: 1370468251}
 --- !u!1 &743880510
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +283,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &844272265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 844272267}
+  - component: {fileID: 844272266}
+  m_Layer: 0
+  m_Name: HighscoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &844272266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844272265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c3f2aac816acd4b8727d123cb693ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &844272267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844272265}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 279.9183, y: 173.49808, z: -1.1993989}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1035888357
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,3 +617,4 @@ SceneRoots:
   - {fileID: 102552237}
   - {fileID: 1035888360}
   - {fileID: 743880514}
+  - {fileID: 844272267}
