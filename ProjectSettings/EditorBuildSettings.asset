@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HighScoreScene.unity
     guid: 56ae9bf7b7927f84bb7d5223724cc125
+  - enabled: 1
+    path: Assets/Scenes/Tutorial L2.unity
+    guid: 2e48cd86b10584147a9df40573de58da
+  - enabled: 1
+    path: Assets/Scenes/Tutorial L3.unity
+    guid: 2e5c5b6f24a538a489308f997a7737b5
   m_configObjects: {}
