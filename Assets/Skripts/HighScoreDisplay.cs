@@ -17,7 +17,7 @@ public class HighScoreDisplay : MonoBehaviour
         highScoreText.text = "High Scores:\n";
         for (int i = 0; i < highScores.Count; i++)
         {
-            highScoreText.text += $"{i + 1}. {highScores[i]}\n";
+            highScoreText.text += $"{i + 1}.    {highScores[i]}\n";
         }
     }
 }
