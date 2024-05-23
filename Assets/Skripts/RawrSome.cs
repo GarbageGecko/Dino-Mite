@@ -14,10 +14,10 @@ public class RawrSome : MonoBehaviour
         switch (currentScene.ToLower())
         {
             case "level1":
-                SceneManager.LoadScene(11); // Load Level 2 if Level 1 was completed
+                SceneManager.LoadScene(2); // Load Level 2 if Level 1 was completed
                 break;
             case "level2":
-                SceneManager.LoadScene(12); // Load Level 3 if Level 2 was completed
+                SceneManager.LoadScene(3); // Load Level 3 if Level 2 was completed
                 break;
             default:
                  SceneManager.LoadScene(0);

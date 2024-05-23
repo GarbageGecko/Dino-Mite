@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Update()
-{
+    {
     HandlePlayerInput();
 
     if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         move.text = "Moves: " + moveValue;
     }
-}
+    }
 
     public void OnTileClicked(Tile tile)
     {
