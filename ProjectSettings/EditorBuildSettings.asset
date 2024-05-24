@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial L3.unity
     guid: 2e5c5b6f24a538a489308f997a7737b5
+  - enabled: 1
+    path: Assets/Scenes/Lvl3RawrSome.unity
+    guid: 3da7d46389bc59548950250dcff900ea
   m_configObjects: {}

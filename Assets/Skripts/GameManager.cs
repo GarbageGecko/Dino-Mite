@@ -109,7 +109,26 @@ public class GameManager : MonoBehaviour
     if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
     {
         HighScoreManager.Instance.AddHighScore(moveValue);
-        SceneManager.LoadScene(6);
+
+        string currentScene = _activeSceneName;
+
+        switch (currentScene.ToLower())
+        {
+            case "level1":
+                SceneManager.LoadScene(6); // Load Level 2 if Level 1 was completed
+                break;
+            case "level2":
+                SceneManager.LoadScene(6); // Load Level 3 if Level 2 was completed
+                break;
+            case "level3":
+                SceneManager.LoadScene(13); // Load Level 3 if Level 2 was completed
+                break;
+            default:
+                 SceneManager.LoadScene(0);
+                 Debug.Log("No next level defined for this level");
+               
+                break;
+        }
         moveValue=0;
         _hasReachedBaby = false;
     }
