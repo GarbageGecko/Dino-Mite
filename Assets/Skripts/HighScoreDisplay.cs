@@ -14,7 +14,7 @@ public class HighScoreDisplay : MonoBehaviour
     void DisplayHighScores()
     {
         List<int> highScores = HighScoreManager.Instance.GetHighScores();
-        highScoreText.text = "High Scores:\n";
+        highScoreText.text = "Good job!\n";
         for (int i = 0; i < highScores.Count; i++)
         {
             highScoreText.text += $"{i + 1}.    {highScores[i]}\n";

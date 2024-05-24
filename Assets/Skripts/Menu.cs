@@ -16,6 +16,11 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
+    public void OnHighscore ()
+    {
+         SceneManager.LoadScene("HighScoreScene");
+    }
+
     public void OnQuit()
     {
         Application.Quit();
