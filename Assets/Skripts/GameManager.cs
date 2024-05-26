@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private bool _hasReachedBaby = false;
     static public string _activeSceneName;
 
+
     public int Width => _width;
     public int Height => _height;
     public bool HasReachedBaby { get => _hasReachedBaby; set => _hasReachedBaby = value; }
@@ -86,6 +87,7 @@ public class GameManager : MonoBehaviour
         SpawnBabyDino();
         StartCoroutine(MoveMeteorsDownCoroutine());
     }
+
 
     void SpawnPlayer()
     {

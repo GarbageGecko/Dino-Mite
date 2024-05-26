@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+
     public void OnPlayButton()
     {
         SceneManager.LoadScene(7);              //Load Level 1
@@ -14,6 +15,11 @@ public class Menu : MonoBehaviour
     public void OnChangeLevel()
     {
         SceneManager.LoadScene(4);
+    }
+
+    public void OnTutorial()
+    {
+        SceneManager.LoadScene(7);
     }
 
     public void OnHighscore ()
