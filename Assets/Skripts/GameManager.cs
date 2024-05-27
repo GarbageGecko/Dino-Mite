@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _fastMeteorPreviewPrefab;
     [SerializeField] private GameObject _explosiveMeteorPreviewPrefab;
 
-    [SerializeField] private Text move; // Assign in the inspector
+    [SerializeField] private Text move; 
 
     private List<GameObject> _meteorPreviews = new List<GameObject>();
     private Dictionary<Vector2, Tile> _tiles;
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour
     private float _spawnInterval = 1f;
     private bool _hasReachedBaby = false;
     static public string _activeSceneName;
-
 
     public int Width => _width;
     public int Height => _height;
@@ -78,8 +77,52 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 1f, -10);
+        AdjustCamera();
     }
+void AdjustCamera()
+{
+    // Calculate the center of the grid
+    Vector3 centerPosition = new Vector3((float)_width / 2 - 1, (float)_height / 2 - 1, -10);
+    
+    // Set the desired height for the camera above the grid
+    float cameraHeight = 10.0f; // Adjust this value as needed
+    
+    // Position the camera at the center of the grid with the desired height
+    _cam.transform.position = new Vector3(centerPosition.x, centerPosition.y + 1.0f, -cameraHeight); // Adjusted the y-position to be higher
+
+    // Adjust the orthographic size to fit the entire grid
+    Camera cam = _cam.GetComponent<Camera>();
+    if (cam != null)
+    {
+        float aspectRatio = (float)Screen.width / (float)Screen.height;
+        float gridHeight = _height;
+        float gridWidth = _width;
+
+        // Calculate the desired orthographic size based on the width of the grid
+        float desiredOrthographicSizeWidth = (gridWidth / 2) / aspectRatio;
+
+        // Use the larger of the two orthographic sizes (height or width)
+        cam.orthographicSize = Mathf.Max(gridHeight / 2, desiredOrthographicSizeWidth) + 0.5f; // Increased by 0.5f for more zoom in
+
+        // Adjust camera's position if the width is larger than the height
+        float cameraWidth = cam.orthographicSize * aspectRatio;
+        if (cameraWidth < gridWidth / 2)
+        {
+            float requiredCameraPositionX = (gridWidth / 2) - cameraWidth + 1.0f; // Adjusted by 1.0f for more space on both sides
+            float requiredCameraPositionY = (gridHeight / 2) - cam.orthographicSize + 1.0f; // Adjusted by 1.0f for more space at the top
+            _cam.transform.position = new Vector3(requiredCameraPositionX, requiredCameraPositionY + 1.0f, -cameraHeight); // Adjusted the y-position to be higher
+        }
+    }
+    else
+    {
+        Debug.LogError("No Camera component found on the _cam transform.");
+    }
+}
+
+
+
+
+
 
     void StartRound()
     {
@@ -87,7 +130,6 @@ public class GameManager : MonoBehaviour
         SpawnBabyDino();
         StartCoroutine(MoveMeteorsDownCoroutine());
     }
-
 
     void SpawnPlayer()
     {
@@ -106,40 +148,21 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-    HandlePlayerInput();
+        HandlePlayerInput();
 
-    if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
-    {
-        HighScoreManager.Instance.AddHighScore(moveValue);
-
-        string currentScene = _activeSceneName;
-
-        switch (currentScene.ToLower())
+        if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
         {
-            case "level1":
-                SceneManager.LoadScene(6); // Load Level 2 if Level 1 was completed
-                break;
-            case "level2":
-                SceneManager.LoadScene(6); // Load Level 3 if Level 2 was completed
-                break;
-            case "level3":
-                SceneManager.LoadScene(13); // Load Level 3 if Level 2 was completed
-                break;
-            default:
-                 SceneManager.LoadScene(0);
-                 Debug.Log("No next level defined for this level");
-               
-                break;
+            HighScoreManager.Instance.AddHighScore(moveValue);
+            SceneManager.LoadScene(6);
+            moveValue=0;
+            _hasReachedBaby = false;
         }
-        moveValue=0;
-        _hasReachedBaby = false;
-    }
-    DisplayMeteorPreviews();
+        DisplayMeteorPreviews();
 
-    if (move != null)
-    {
-        move.text = "Moves: " + moveValue;
-    }
+        if (move != null)
+        {
+            move.text = "Moves: " + moveValue;
+        }
     }
 
     public void OnTileClicked(Tile tile)
@@ -155,10 +178,13 @@ public class GameManager : MonoBehaviour
     }
 
     void DisplayMeteorPreviews()
-    {
-        ClearMeteorPreviews(); // Clear previous previews
+{
+    ClearMeteorPreviews(); // Clear previous previews
 
-        foreach (var meteor in _meteors)
+    foreach (var meteor in _meteors)
+    {
+        // Check if the meteor is above the bottom row
+        if (meteor.transform.position.y > 0)
         {
             Vector2 nextPosition = GetNextMeteorPosition(meteor);
             GameObject previewObject = null;
@@ -175,7 +201,7 @@ public class GameManager : MonoBehaviour
             else if (meteor.GetType() == typeof(ExplosiveMeteor))
             {
                 previewObject = Instantiate(_explosiveMeteorPreviewPrefab, nextPosition, Quaternion.identity);
-                
+
                 // If the explosive meteor is at the bottom, show previews for the small meteors as well
                 if (Mathf.Approximately(meteor.transform.position.y, 0))
                 {
@@ -194,6 +220,8 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+}
+
 
     List<Vector2> GetSmallMeteorPositions(ExplosiveMeteor explosiveMeteor)
     {
