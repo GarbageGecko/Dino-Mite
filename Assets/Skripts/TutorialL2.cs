@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class TutorialL2 : MonoBehaviour
 {
-    public void OnWeiter ()
+   public void OnWeiter ()
     {
+        if(Menu.tutorial ==true){
+            SceneManager.LoadScene(12);
+
+        }else{
         SceneManager.LoadScene(2);
+        }
     }
 }
 
