@@ -82,8 +82,7 @@ public class Player : MonoBehaviour
         BabyDino babyDino = FindObjectOfType<BabyDino>();
         if (babyDino != null)
         {
-            Destroy(babyDino);
-            
+            babyDino.DestroyBabyDino();
             FindObjectOfType<GameManager>().HasReachedBaby = true;
         }
     }

@@ -40,4 +40,9 @@ public class BabyDino : MonoBehaviour
     {
         _isFollowing = true;
     }
+
+     public void DestroyBabyDino()
+    {
+        Destroy(gameObject);
+    }
 }
