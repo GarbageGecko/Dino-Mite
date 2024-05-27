@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//menu skript
 
 public class Menu : MonoBehaviour
 {
 
+static public bool tutorial;
     public void OnPlayButton()
     {
         SceneManager.LoadScene(7);              //Load Level 1
@@ -18,8 +18,9 @@ public class Menu : MonoBehaviour
     }
 
     public void OnTutorial()
-    {
+    {tutorial=true;
         SceneManager.LoadScene(7);
+        
     }
 
     public void OnHighscore ()

@@ -5,11 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class DiedNosaur : MonoBehaviour
 {
-   /*  public void OnPlayAgain ()
-    {
-        SceneManager.LoadScene(1);
-    } */
-
     public void OnMenu ()
     {
         SceneManager.LoadScene(0);

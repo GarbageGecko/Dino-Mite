@@ -122,11 +122,6 @@ void AdjustCamera()
     }
 }
 
-
-
-
-
-
     void StartRound()
     {
         SpawnPlayer();
@@ -148,25 +143,31 @@ void AdjustCamera()
         var tile = GetTileAtPosition(new Vector2(_width - 1, 0));
         Instantiate(_babyDinoPrefab, tile.transform.position, Quaternion.identity);
     }
+void Update()
+{
+    HandlePlayerInput();
 
-    void Update()
+    if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
     {
-        HandlePlayerInput();
-
-        if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
+        HighScoreManager.Instance.AddHighScore(moveValue);
+        if (_activeSceneName == "Level3")
         {
-            HighScoreManager.Instance.AddHighScore(moveValue);
-            SceneManager.LoadScene(6);
-            moveValue=0;
-            _hasReachedBaby = false;
+            SceneManager.LoadScene(13); // Load scene 13 for Level 3
         }
-        DisplayMeteorPreviews();
-
-        if (move != null)
+        else
         {
-            move.text = "Moves: " + moveValue;
+            SceneManager.LoadScene(6); // Load scene 6 for other levels
         }
+        moveValue = 0;
+        _hasReachedBaby = false;
     }
+    DisplayMeteorPreviews();
+
+    if (move != null)
+    {
+        move.text = "Moves: " + moveValue;
+    }
+}
 
     public void OnTileClicked(Tile tile)
     {
@@ -183,13 +184,10 @@ void AdjustCamera()
     }
 
     void DisplayMeteorPreviews()
-{
-    ClearMeteorPreviews(); // Clear previous previews
-
-    foreach (var meteor in _meteors)
     {
-        // Check if the meteor is above the bottom row
-        if (meteor.transform.position.y > 0)
+        ClearMeteorPreviews(); // Clear previous previews
+
+        foreach (var meteor in _meteors)
         {
             Vector2 nextPosition = GetNextMeteorPosition(meteor);
             GameObject previewObject = null;
@@ -206,7 +204,7 @@ void AdjustCamera()
             else if (meteor.GetType() == typeof(ExplosiveMeteor))
             {
                 previewObject = Instantiate(_explosiveMeteorPreviewPrefab, nextPosition, Quaternion.identity);
-
+                
                 // If the explosive meteor is at the bottom, show previews for the small meteors as well
                 if (Mathf.Approximately(meteor.transform.position.y, 0))
                 {
@@ -225,8 +223,6 @@ void AdjustCamera()
             }
         }
     }
-}
-
 
     List<Vector2> GetSmallMeteorPositions(ExplosiveMeteor explosiveMeteor)
     {
