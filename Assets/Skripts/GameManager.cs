@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //_cam.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10);
+        _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 1f, -10);
     }
 
     void StartRound()

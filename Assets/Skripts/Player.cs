@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 
     private void TouchBabyDino()
     {
-         gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
+        gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
         //Debug.Log("You've reached the Baby Dino!");
         BabyDino babyDino = FindObjectOfType<BabyDino>();
         if (babyDino != null)
