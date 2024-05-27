@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     private bool _hasMoved = false;
 
     public Vector2 CurrentTilePosition => _currentTilePosition;
+    public AudioSource src;
+    public AudioClip babysound;
+
+    
     
     public bool HasMoved
     {
@@ -80,6 +84,8 @@ public class Player : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
         //Debug.Log("You've reached the Baby Dino!");
         BabyDino babyDino = FindObjectOfType<BabyDino>();
+       src.clip=babysound;
+             src.Play();
         if (babyDino != null)
         {
             babyDino.DestroyBabyDino();

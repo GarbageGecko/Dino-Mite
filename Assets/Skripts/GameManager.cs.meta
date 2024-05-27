@@ -3,7 +3,21 @@ guid: 699be2299a856924d838a5a3c3c17f41
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _tilePrefab: {instanceID: 0}
+  - _meteorPrefab: {instanceID: 0}
+  - _fastMeteorPrefab: {instanceID: 0}
+  - _explosiveMeteorPrefab: {instanceID: 0}
+  - _smallMeteorPrefab: {instanceID: 0}
+  - _playerPrefab: {instanceID: 0}
+  - _babyDinoPrefab: {instanceID: 0}
+  - _cam: {instanceID: 0}
+  - _normalMeteorPreviewPrefab: {instanceID: 0}
+  - _fastMeteorPreviewPrefab: {instanceID: 0}
+  - _explosiveMeteorPreviewPrefab: {instanceID: 0}
+  - move: {instanceID: 0}
+  - src: {fileID: 291348723768959439, guid: 260ee41cea52e364a9d8aadc4093dee0, type: 3}
+  - movesound: {fileID: 8300000, guid: f83fcfa5b12fdfc47a6203eeceb308c3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

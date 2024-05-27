@@ -4,7 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RawrSome : MonoBehaviour
+
+
 {
+    public AudioSource src;
+    public AudioClip winsound;
+
+void Start()
+    {
+    src.clip=winsound;
+             src.Play();
+             }
     public void OnNextLevel ()
     {
         // Get the current active scene

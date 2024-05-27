@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
 
     public static int moveValue = 0;
 
+    public AudioSource src;
+    public AudioClip movesound;
+
     void Awake()
     {
         if (Instance == null)
@@ -173,6 +176,8 @@ void AdjustCamera()
             if (Vector2.Distance(targetPosition, _player.CurrentTilePosition) == 2) // Ensuring only 1 tile move horizontally
             {
                 _player.MoveToTile(tile);
+                src.clip=movesound;
+                src.Play();
             }
         }
     }

@@ -14,6 +14,14 @@ public class DiedNosaur : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+public AudioSource src;
+    public AudioClip diesound;
+
+void Start()
+    {
+    src.clip=diesound;
+             src.Play();
+             }
 
 public void OnPlayAgain (){
     // Get the current active scene
