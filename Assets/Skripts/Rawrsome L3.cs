@@ -5,8 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class RawrsomeL3 : MonoBehaviour
 {
-    public void OnMenu ()
+  public AudioSource src;
+    public AudioClip winsound;
+     void Start()
     {
+        src.clip = winsound;
+        src.Play();
+    }
+    public void OnMenu ()
+
+    {
+    
         SceneManager.LoadScene(0);
     }
 
