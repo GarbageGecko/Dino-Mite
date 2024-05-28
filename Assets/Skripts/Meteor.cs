@@ -1,5 +1,4 @@
 using UnityEngine;
-//meteor skript
 
 public class Meteor : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class Meteor : MonoBehaviour
     }
     public virtual Vector3 GetNextPosition()
 {
-    return transform.position + new Vector3(0, -2, 0); // Standardbewegung um 2 Einheiten nach unten
+    return transform.position + new Vector3(0, -2, 0); 
 }
 
 }

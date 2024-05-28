@@ -1,5 +1,4 @@
 using UnityEngine;
-//Baby Dino Skript
 
 public class BabyDino : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class BabyDino : MonoBehaviour
             transform.position = tile.transform.position;
         }
 
-        _player = FindObjectOfType<Player>(); // Spieler-Referenz erhalten
+        _player = FindObjectOfType<Player>();
     }
 
     void Update()

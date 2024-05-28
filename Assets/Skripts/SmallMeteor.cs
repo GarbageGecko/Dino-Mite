@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-//Small meteor skript
-
 public class SmallMeteor : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D _rigidbody;

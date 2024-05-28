@@ -1,6 +1,4 @@
 using UnityEngine;
-// explosive Meteor skript
-
 public class ExplosiveMeteor : Meteor
 {
     [SerializeField] private SmallMeteor _smallMeteorPrefab;
@@ -11,10 +9,9 @@ public class ExplosiveMeteor : Meteor
         _gameManager = FindObjectOfType<GameManager>();
     }
 
-
     public override void MoveDown()
     {
-        _rigidbody.MovePosition(transform.position + new Vector3(0, -2, 0)); // Bewegt den ExplosiveMeteor um ein Feld nach unten
+        _rigidbody.MovePosition(transform.position + new Vector3(0, -2, 0));
 
         // Überprüfen, ob der ExplosiveMeteor ganz unten angekommen ist
         if (transform.position.y <= 0)

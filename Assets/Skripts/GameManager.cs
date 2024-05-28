@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
- public Player Player { get; set; } 
+    public Player Player { get; set; }
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
     [SerializeField] private Meteor _meteorPrefab;
@@ -21,14 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject _fastMeteorPreviewPrefab;
     [SerializeField] private GameObject _explosiveMeteorPreviewPrefab;
 
-    [SerializeField] private Text move; 
+    [SerializeField] private Text move;
 
     private List<GameObject> _meteorPreviews = new List<GameObject>();
     private Dictionary<Vector2, Tile> _tiles;
     private List<Meteor> _meteors = new List<Meteor>();
     private Player _player;
-    private float _nextSpawnTime = 0f;
-    private float _spawnInterval = 1f;
     private bool _hasReachedBaby = false;
     static public string _activeSceneName;
 
@@ -82,45 +80,44 @@ public class GameManager : MonoBehaviour
 
         AdjustCamera();
     }
-void AdjustCamera()
-{
-    // Calculate the center of the grid
-    Vector3 centerPosition = new Vector3((float)_width / 2 - 1, (float)_height / 2 - 1, -10);
-    
-    // Set the desired height for the camera above the grid
-    float cameraHeight = 10.0f; // Adjust this value as needed
-    
-    // Position the camera at the center of the grid with the desired height
-    _cam.transform.position = new Vector3(centerPosition.x, centerPosition.y + 1.0f, -cameraHeight); // Adjusted the y-position to be higher
-
-    // Adjust the orthographic size to fit the entire grid
-    Camera cam = _cam.GetComponent<Camera>();
-    if (cam != null)
+    void AdjustCamera()
     {
-        float aspectRatio = (float)Screen.width / (float)Screen.height;
-        float gridHeight = _height;
-        float gridWidth = _width;
+        // Calculate the center of the grid
+        Vector3 centerPosition = new Vector3((float)_width / 2 - 1, (float)_height / 2 - 1, -10);
 
-        // Calculate the desired orthographic size based on the width of the grid
-        float desiredOrthographicSizeWidth = (gridWidth / 2) / aspectRatio;
+        // Set the desired height for the camera above the grid
+        float cameraHeight = 10.0f; // Adjust this value as needed
 
-        // Use the larger of the two orthographic sizes (height or width)
-        cam.orthographicSize = Mathf.Max(gridHeight / 2, desiredOrthographicSizeWidth) + 0.5f; // Increased by 0.5f for more zoom in
-
-        // Adjust camera's position if the width is larger than the height
-        float cameraWidth = cam.orthographicSize * aspectRatio;
-        if (cameraWidth < gridWidth / 2)
+        // Position the camera at the center of the grid with the desired height
+        _cam.transform.position = new Vector3(centerPosition.x, centerPosition.y + 1.0f, -cameraHeight);
+        // Adjust the orthographic size to fit the entire grid
+        Camera cam = _cam.GetComponent<Camera>();
+        if (cam != null)
         {
-            float requiredCameraPositionX = (gridWidth / 2) - cameraWidth + 1.0f; // Adjusted by 1.0f for more space on both sides
-            float requiredCameraPositionY = (gridHeight / 2) - cam.orthographicSize + 1.0f; // Adjusted by 1.0f for more space at the top
-            _cam.transform.position = new Vector3(requiredCameraPositionX, requiredCameraPositionY + 1.0f, -cameraHeight); // Adjusted the y-position to be higher
+            float aspectRatio = (float)Screen.width / (float)Screen.height;
+            float gridHeight = _height;
+            float gridWidth = _width;
+
+            // Calculate the desired orthographic size based on the width of the grid
+            float desiredOrthographicSizeWidth = (gridWidth / 2) / aspectRatio;
+
+            // Use the larger of the two orthographic sizes (height or width)
+            cam.orthographicSize = Mathf.Max(gridHeight / 2, desiredOrthographicSizeWidth) + 0.5f; // Increased by 0.5f for more zoom in
+
+            // Adjust camera's position if the width is larger than the height
+            float cameraWidth = cam.orthographicSize * aspectRatio;
+            if (cameraWidth < gridWidth / 2)
+            {
+                float requiredCameraPositionX = (gridWidth / 2) - cameraWidth + 1.0f; // Adjusted by 1.0f for more space on both sides
+                float requiredCameraPositionY = (gridHeight / 2) - cam.orthographicSize + 1.0f; // Adjusted by 1.0f for more space at the top
+                _cam.transform.position = new Vector3(requiredCameraPositionX, requiredCameraPositionY + 1.0f, -cameraHeight); // Adjusted the y-position to be higher
+            }
+        }
+        else
+        {
+            Debug.LogError("No Camera component found on the _cam transform.");
         }
     }
-    else
-    {
-        Debug.LogError("No Camera component found on the _cam transform.");
-    }
-}
 
     void StartRound()
     {
@@ -143,31 +140,31 @@ void AdjustCamera()
         var tile = GetTileAtPosition(new Vector2(_width - 1, 0));
         Instantiate(_babyDinoPrefab, tile.transform.position, Quaternion.identity);
     }
-void Update()
-{
-    HandlePlayerInput();
-
-    if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
+    void Update()
     {
-        HighScoreManager.Instance.AddHighScore(moveValue);
-        if (_activeSceneName == "Level3")
-        {
-            SceneManager.LoadScene(13); // Load scene 13 for Level 3
-        }
-        else
-        {
-            SceneManager.LoadScene(6); // Load scene 6 for other levels
-        }
-        moveValue = 0;
-        _hasReachedBaby = false;
-    }
-    DisplayMeteorPreviews();
+        HandlePlayerInput();
 
-    if (move != null)
-    {
-        move.text = "Moves: " + moveValue;
+        if (_hasReachedBaby && _player.CurrentTilePosition == new Vector2(0, 0))
+        {
+            HighScoreManager.Instance.AddHighScore(moveValue);
+            if (_activeSceneName == "Level3")
+            {
+                SceneManager.LoadScene(13);
+            }
+            else
+            {
+                SceneManager.LoadScene(6);
+            }
+            moveValue = 0;
+            _hasReachedBaby = false;
+        }
+        DisplayMeteorPreviews();
+
+        if (move != null)
+        {
+            move.text = "Moves: " + moveValue;
+        }
     }
-}
 
     public void OnTileClicked(Tile tile)
     {
@@ -177,7 +174,7 @@ void Update()
             if (Vector2.Distance(targetPosition, _player.CurrentTilePosition) == 2) // Ensuring only 1 tile move horizontally
             {
                 _player.MoveToTile(tile);
-                src.clip=movesound;
+                src.clip = movesound;
                 src.Play();
             }
         }
@@ -204,7 +201,7 @@ void Update()
             else if (meteor.GetType() == typeof(ExplosiveMeteor))
             {
                 previewObject = Instantiate(_explosiveMeteorPreviewPrefab, nextPosition, Quaternion.identity);
-                
+
                 // If the explosive meteor is at the bottom, show previews for the small meteors as well
                 if (Mathf.Approximately(meteor.transform.position.y, 0))
                 {
@@ -238,11 +235,11 @@ void Update()
     Vector2 GetNextMeteorPosition(Meteor meteor)
     {
         Vector2 currentPosition = meteor.transform.position;
-        float moveDistance = 2; // Default move distance
+        float moveDistance = 2; 
 
         if (meteor.GetType() == typeof(FastMeteor))
         {
-            moveDistance = 4; // FastMeteor moves double the distance
+            moveDistance = 4;
         }
 
         Vector2 nextPosition = currentPosition + new Vector2(0, -moveDistance);
@@ -293,7 +290,7 @@ void Update()
 
             _player.HasMoved = false;
 
-            yield return null; // Continue immediately
+            yield return null;
         }
     }
 
@@ -328,7 +325,7 @@ void Update()
                 }
 
                 _meteors.Add(newMeteor);
-                _nextSpawnTime = Time.time + _spawnInterval;
+
             }
         }
     }

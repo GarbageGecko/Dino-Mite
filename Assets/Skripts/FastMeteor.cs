@@ -1,5 +1,4 @@
 using UnityEngine;
-//fast Meteor skript
 public class FastMeteor : Meteor
 {
     public override void MoveDown()

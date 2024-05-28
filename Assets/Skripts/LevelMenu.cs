@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//level menu skript
 public class LevelMenu : MonoBehaviour
 {
     public void OnLevel1 ()
