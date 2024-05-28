@@ -8,19 +8,18 @@ public class Tile : MonoBehaviour
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private GameObject _highlight;
 
-    private int _height; // Add a variable to store the height
-    public Vector2 Position => transform.position; // Add a property to get the tile's position
+    private int _height;
+    public Vector2 Position => transform.position;
 
-    // Modify the Init method to accept height
     public void Init(bool isOffset, int height)
     {
         _renderer.color = isOffset ? _offsetColor : _baseColor;
-        _height = height; // Store the height
+        _height = height;
     }
 
     void OnMouseEnter()
     {
-        if (_height == 0) // Only highlight if this is the bottom row
+        if (IsTileAdjacentToPlayer() && _height == 0)
         {
             _highlight.SetActive(true);
         }
@@ -28,7 +27,7 @@ public class Tile : MonoBehaviour
 
     void OnMouseExit()
     {
-        if (_height == 0) // Only un-highlight if this is the bottom row
+        if (_height == 0)
         {
             _highlight.SetActive(false);
         }
@@ -36,6 +35,21 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown()
     {
-        GameManager.Instance.OnTileClicked(this);
+        if (IsTileAdjacentToPlayer())
+        {
+            GameManager.Instance.OnTileClicked(this);
+        }
+    }
+
+    private bool IsTileAdjacentToPlayer()
+    {
+        Player player = GameManager.Instance.Player;
+        if (player != null)
+        {
+            Vector2 playerPosition = player.CurrentTilePosition;
+            float horizontalDistance = Mathf.Abs(playerPosition.x - transform.position.x);
+            return horizontalDistance == 2 && transform.position.y == 0; // Adjacent horizontal tiles on the bottom row
+        }
+        return false;
     }
 }

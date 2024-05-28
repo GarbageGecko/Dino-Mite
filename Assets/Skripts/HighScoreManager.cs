@@ -24,7 +24,7 @@ public class HighScoreManager : MonoBehaviour
     public void AddHighScore(int score)
     {
         highScores.Add(score);
-        highScores.Sort((a, b) => b.CompareTo(a)); // Sort descending
+        highScores.Sort(); // Sort ascending
         if (highScores.Count > 10)
         {
             highScores.RemoveAt(10); // Keep only top 10 scores
@@ -36,8 +36,9 @@ public class HighScoreManager : MonoBehaviour
         return highScores;
     }
 
-     public void OnMenu ()
+    public void OnMenu()
     {
         SceneManager.LoadScene(0);
     }
 }
+

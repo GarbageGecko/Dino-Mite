@@ -7,9 +7,19 @@ public class Menu : MonoBehaviour
 {
 
 static public bool tutorial;
+ static public bool seenTutorial = false;
+
     public void OnPlayButton()
     {
-        SceneManager.LoadScene(7);              //Load Level 1
+        if (!seenTutorial)
+        {
+            SceneManager.LoadScene(7);
+        }
+        else
+        {
+            SceneManager.LoadScene(1);
+        }
+        seenTutorial = true;
     }
 
     public void OnChangeLevel()

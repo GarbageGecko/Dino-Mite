@@ -9,13 +9,15 @@ public class RawrSome : MonoBehaviour
 {
     public AudioSource src;
     public AudioClip winsound;
+    static public bool seenTutorial2 = false;
+   static public bool seenTutorial3 = false;
 
-void Start()
+    void Start()
     {
-    src.clip=winsound;
-             src.Play();
-             }
-    public void OnNextLevel ()
+        src.clip = winsound;
+        src.Play();
+    }
+    public void OnNextLevel()
     {
         // Get the current active scene
         string currentScene = GameManager._activeSceneName;
@@ -24,26 +26,36 @@ void Start()
         switch (currentScene.ToLower())
         {
             case "level1":
-                SceneManager.LoadScene(11); // Load Level 2 if Level 1 was completed
+                if (!seenTutorial2)
+                {
+                    SceneManager.LoadScene(11); // Load Level 2 if Level 1 was completed
+                }
+                else { SceneManager.LoadScene(2); }
+                seenTutorial2=true;
                 break;
             case "level2":
-                SceneManager.LoadScene(12); // Load Level 3 if Level 2 was completed
+             if (!seenTutorial3)
+                {
+                    SceneManager.LoadScene(12); // Load Level 2 if Level 1 was completed
+                }
+                else { SceneManager.LoadScene(3); }
+              seenTutorial3=true;
                 break;
             default:
-                 SceneManager.LoadScene(0);
-                 Debug.Log("No next level defined for this level");
-               
+                SceneManager.LoadScene(0);
+                Debug.Log("No next level defined for this level");
+
                 break;
         }
     }
 
-    public void OnMenu ()
+    public void OnMenu()
     {
         SceneManager.LoadScene(0);
     }
 
-      public void OnHighscore ()
+    public void OnHighscore()
     {
-         SceneManager.LoadScene("HighScoreScene");
+        SceneManager.LoadScene("HighScoreScene");
     }
 }

@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     {
         _mainCamera = Camera.main;
         _gridManager = FindObjectOfType<GameManager>();
+        GameManager.Instance.Player = this;
     }
 
     private void Update()
