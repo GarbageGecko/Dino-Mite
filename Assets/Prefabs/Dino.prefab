@@ -78,8 +78,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1364773937
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c9df62caf0c812b45b195366e393103b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -151,10 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newSprite: {fileID: 21300000, guid: d0d5f3391e747fa4daefb1d31a8a31a3, type: 3}
   src: {fileID: -3667898251616929147}
-  movesound: {fileID: 8300000, guid: f83fcfa5b12fdfc47a6203eeceb308c3, type: 3}
-  winsound: {fileID: 8300000, guid: 7d7c3e370c710264ea3d00a66d2e017e, type: 3}
   babysound: {fileID: 8300000, guid: 4208c00a58fb2ed4c83143587a9aeede, type: 3}
-  diesound: {fileID: 8300000, guid: f2cddb905a72f334eb18f78339282e60, type: 3}
 --- !u!222 &3622229275875601003
 CanvasRenderer:
   m_ObjectHideFlags: 0

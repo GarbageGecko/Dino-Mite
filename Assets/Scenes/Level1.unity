@@ -183,9 +183,6 @@ MonoBehaviour:
   move: {fileID: 1370468251}
   src: {fileID: 1595138076}
   movesound: {fileID: 8300000, guid: f83fcfa5b12fdfc47a6203eeceb308c3, type: 3}
-  babysound: {fileID: 8300000, guid: 4208c00a58fb2ed4c83143587a9aeede, type: 3}
-  winsound: {fileID: 8300000, guid: 7d7c3e370c710264ea3d00a66d2e017e, type: 3}
-  diesound: {fileID: 8300000, guid: f2cddb905a72f334eb18f78339282e60, type: 3}
 --- !u!1001 &161380516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -301,15 +298,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a59cee5ef3511fe489ef2f2da0f9bbaf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e88d75d6d1f0f04199df101ce135af4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 80, y: 45}
+  m_Size: {x: 80, y: 42.421875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &222294504
@@ -321,9 +318,9 @@ Transform:
   m_GameObject: {fileID: 222294502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 4.11, z: 0}
-  m_LocalScale: {x: 0.24201919, y: 0.24698128, z: 0.2611624}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 9.5, y: 5, z: 0}
+  m_LocalScale: {x: 0.2849142, y: 0.29075578, z: 0.3074503}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
